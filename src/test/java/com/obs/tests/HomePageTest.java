@@ -37,41 +37,28 @@ public class HomePageTest extends BaseTest{
 		soft.assertAll();
 	}
 	
-	@Test(priority = 2, enabled = false)
+	@Test(priority = 2, enabled = true)
 	public void verifySearchWithInvalidData() throws Exception { //bug found
 		soft = new SoftAssert();
 		homePage.performSearchOperation("zzz");
 		soft.assertTrue(homePage.isSearchPageDisplayed(), "Search Page is not displayed");
-		soft.assertFalse(homePage.checkSearchContent("zzz","invalid"), "Search with invalid data showing result");
+		soft.assertTrue(homePage.checkSearchContent("zzz","invalid"), "Search with invalid data showing result");
 		soft.assertAll();
 	}
 	
-	@Test(priority = 3, enabled = false)    //--site defect=> pagination next is always enabled
+	/*
+	 * Verify the search reparation shows reperation list according to the search content
+	 */
+	@Test(priority = 3, enabled = false)    
 	public void verifySearchWithValidData() throws Exception {
 		soft = new SoftAssert();
-		boolean isPaginationNextEnabled = false;
-		boolean isFound = false;
 		homePage.performSearchOperation("aaa");
 		soft.assertTrue(homePage.isSearchPageDisplayed(), "Search Page is not displayed");
-		do {
-			System.out.println("==============================="+isPaginationNextEnabled);
-			isPaginationNextEnabled = homePage.isPaginationNextEnabled();
-			System.out.println("==============================="+isPaginationNextEnabled);
-			isFound = homePage.checkSearchContent("aaa","valid");
-			if(isFound) {
-				System.out.println("=================founded");
-				break;
-			}
-			System.out.println("inside do while");
-			if(isPaginationNextEnabled) {
-				homePage.clickOnPaginationNext();
-			}
-		}while(isPaginationNextEnabled);
-		soft.assertTrue(isFound, "Search with valid data- not showing list with serach content");
+		soft.assertTrue(homePage.checkSearchContent("aaa","valid"), "Search with valid data- not showing list with serach content");
 	}
 	
-	@Test(priority = 4, enabled = true)
-	public void verifyStockSublist() throws Exception { //if only executed this test all asertion passed, otherwise only first assertion is passed
+	@Test(priority = 4, enabled = true, groups= {"SanityTest"})
+	public void verifyStockSublist() throws Exception { //if only executed this test all asertion passed, otherwise only first assertion is passed (sometimes any number
 		soft = new SoftAssert();
 		homePage.clickOnStockTab();
 		soft.assertTrue(homePage.isViewStockDisplayed(), "View Stock is not displayed");

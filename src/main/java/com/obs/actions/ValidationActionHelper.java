@@ -1,5 +1,6 @@
 package com.obs.actions;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -45,6 +46,21 @@ public class ValidationActionHelper {
 			return elementSelected;
 		}catch(Exception e) {
 			throw new Exception("isElementEnabled (ValidationActionHelper) : "+e.getMessage());
+		}
+	}
+	/**
+	 * method to check weather the element is present or not
+	 * @throws Exception 
+	 */
+	public boolean isElementPresentByXpath(WebDriver driver, String xpathValue) throws Exception {
+		boolean isElementPresent = false;
+		try {
+			if( driver.findElements(By.xpath(xpathValue)).size() > 0 ) {
+				isElementPresent = true; 
+			} 
+			return isElementPresent; 
+		}catch (Exception e) {
+			throw new Exception("isElementPresentByXpath (ValidationActionHelper) : "+e.getMessage());
 		}
 	}
 }	

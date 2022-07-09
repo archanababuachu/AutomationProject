@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -120,6 +121,18 @@ public class UtilityActionHelper {
 		}
 	}
 	/**
+	 * method to hover the mouse and click by xpath
+	 * @throws Exception 
+	 */
+	public void hoverMouseAndClickByXpath(WebDriver driver, String xpath) throws Exception {
+		try {
+			Actions act = new Actions (driver);
+			act.moveToElement(driver.findElement(By.xpath(xpath))).click().build().perform();
+		}catch (Exception e) {
+			throw new Exception("hoverMouseAndClickByXpath (UtilityActionHelper) : "+e.getMessage());
+		}
+	}
+	/**
 	 * method to drag and drop
 	 * @throws Exception 
 	 */
@@ -144,15 +157,57 @@ public class UtilityActionHelper {
 		}
 	}
 	/**
-	 * method to wait until element visibility
+	 * method to wait until element visibility (by xpath)
 	 * @throws Exception 
 	 */
-	public void waitUntilElementVisible(WebDriver driver, WebElement element) throws Exception {
+	public void waitUntilElementVisible(WebDriver driver, String xpath) throws Exception {
 		try {
-			WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(20));
-			//wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+			WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(30));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
 		}catch (Exception e) {
 			throw new Exception("waitUntilElementVisible (UtilityActionHelper) : "+e.getMessage());
+		}
+	}
+	/**
+	 * method to wait until an element is invisible
+	 */
+	public void waitUntilElementInvisible(WebDriver driver, String xpathValue) {
+		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(30));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(xpathValue)));
+	}
+	/**
+	 * wait until element clickable  (by By) and get the text of element and check it contains that text
+	 * @throws Exception 
+	 * @param driver
+	 * @param searchtext
+	 * @param is
+	 * @return boolean
+	 */
+	public boolean waitUntilElementClickableAndCheckTextContains(WebDriver driver, String id,String text) throws Exception {
+		boolean status;
+		try {
+			WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(30));
+			String content = wait.until(ExpectedConditions.elementToBeClickable(By.id(id))).getText();
+			if (content.contains(text)) {
+			    status = true;
+			 } else {
+			    status = false;
+			 }
+			return status;
+		}catch (Exception e) {
+			throw new Exception("waitUntilElementClickable (UtilityActionHelper) : "+e.getMessage());
+		}
+	}
+	/**
+	 * scroll to an element until it is visible
+	 * @throws Exception 
+	 */
+	public void scrollToAnElement(WebDriver driver, WebElement element) throws Exception {
+		try {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].scrollIntoView();", element);
+		}catch (Exception e) {
+			throw new Exception("scrollToAnElement (UtilityActionHelper) : "+e.getMessage());
 		}
 	}
 	

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="3" total="4" passed="0" failed="1" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2022-07-08T15:09:05 IST" name="Suite" finished-at="2022-07-08T15:09:39 IST" duration-ms="34028">
+    <groups>
+    </groups>
+    <test started-at="2022-07-08T15:09:05 IST" name="ChromeTest" finished-at="2022-07-08T15:09:39 IST" duration-ms="33723">
+      <class name="com.obs.tests.ManufacturersTest">
+        <test-method is-config="true" signature="launch(java.lang.String)[pri:0, instance:com.obs.tests.ManufacturersTest@1ed4ae0f]" started-at="2022-07-08T15:09:05 IST" name="launch" finished-at="2022-07-08T15:09:22 IST" duration-ms="16789" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- launch -->
+        <test-method is-config="true" signature="setup()[pri:0, instance:com.obs.tests.ManufacturersTest@1ed4ae0f]" started-at="2022-07-08T15:09:22 IST" name="setup" finished-at="2022-07-08T15:09:30 IST" duration-ms="8097" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="verifySearchManufacturer()[pri:2, instance:com.obs.tests.ManufacturersTest@1ed4ae0f]" started-at="2022-07-08T15:09:30 IST" name="verifySearchManufacturer" finished-at="2022-07-08T15:09:33 IST" duration-ms="3377" status="FAIL">
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[The following asserts failed:
+Valid Search is not accurate expected [true] but found [false],
+Inalid Search is not accurate expected [true] but found [false]]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: The following asserts failed:
+Valid Search is not accurate expected [true] but found [false],
+Inalid Search is not accurate expected [true] but found [false]
+at org.testng.asserts.SoftAssert.assertAll(SoftAssert.java:46)
+at org.testng.asserts.SoftAssert.assertAll(SoftAssert.java:30)
+at com.obs.tests.ManufacturersTest.verifySearchManufacturer(ManufacturersTest.java:76)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:677)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:221)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:962)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:194)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:806)
+at org.testng.TestRunner.run(TestRunner.java:601)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:433)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:427)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:387)
+at org.testng.SuiteRunner.run(SuiteRunner.java:330)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1256)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1176)
+at org.testng.TestNG.runSuites(TestNG.java:1099)
+at org.testng.TestNG.run(TestNG.java:1067)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifySearchManufacturer -->
+        <test-method is-config="true" signature="logout()[pri:0, instance:com.obs.tests.ManufacturersTest@1ed4ae0f]" started-at="2022-07-08T15:09:33 IST" name="logout" finished-at="2022-07-08T15:09:34 IST" duration-ms="819" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- logout -->
+        <test-method is-config="true" signature="quit()[pri:0, instance:com.obs.tests.ManufacturersTest@1ed4ae0f]" started-at="2022-07-08T15:09:34 IST" name="quit" finished-at="2022-07-08T15:09:39 IST" duration-ms="4551" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- quit -->
+      </class> <!-- com.obs.tests.ManufacturersTest -->
+    </test> <!-- ChromeTest -->
+    <test started-at="2022-07-08T15:09:39 IST" name="EdgeTest" finished-at="2022-07-08T15:09:39 IST" duration-ms="2">
+    </test> <!-- EdgeTest -->
+  </suite> <!-- Suite -->
+</testng-results>

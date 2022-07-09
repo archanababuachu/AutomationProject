@@ -56,7 +56,7 @@ public class LoginPage {
 		return wahObj.getSiteTitle(driver);
 	}
 	public boolean isUserNameFieldDisplayed() throws Exception {
-		return vahObj.isElementVisible(driver, uname);
+		return vahObj.isElementPresentByXpath(driver, "//input[@id='identity']");
 	}
 	public boolean isPasswordFieldDisplayed() throws Exception {
 		return vahObj.isElementVisible(driver, password);

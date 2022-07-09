@@ -24,6 +24,7 @@ public class SendKeysActionHelper {
 	public void clearTextAndSendKeys(WebDriver driver, WebElement element, String inputText) throws Exception {
 		try {
 			element.clear();
+			element.click();
 			element.sendKeys(inputText);
 		}catch(Exception e) {
 			throw new Exception("clearTextAndSendKeys (SendKeysActionHelper) "+e.getMessage());

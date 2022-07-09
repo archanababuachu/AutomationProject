@@ -49,7 +49,7 @@ public class LoginTest extends BaseTest{
 		soft.assertAll();
 	}
 	
-	@Test(priority = 3, dataProvider = "Credentials")
+	@Test(priority = 3, dataProvider = "Credentials", enabled = true, groups = {"SanityTest"})
 	public void verifyAllLogin(String uname, String pwd) throws Exception {
 		
 		soft = new SoftAssert();

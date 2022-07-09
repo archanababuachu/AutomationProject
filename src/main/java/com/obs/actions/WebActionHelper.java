@@ -11,8 +11,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 
 import com.obs.datahandler.PropertyDataHandler;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class WebActionHelper {
 
@@ -29,6 +32,9 @@ public class WebActionHelper {
 				System.setProperty("webdriver.chrome.driver", filePath);
 				driver = new ChromeDriver();
 				break;
+			case "edge":
+				WebDriverManager.edgedriver().setup();
+				driver = new EdgeDriver();
 
 			default:
 				break;

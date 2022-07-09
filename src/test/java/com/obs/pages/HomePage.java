@@ -34,18 +34,27 @@ public class HomePage {
 	WebElement hambergerButton;
 	@FindBy(xpath = "//a[contains(.,'Stock/Inventory')]")
 	WebElement stockTab;
+	
 	@FindBy(xpath = " //input[@name='q' and @class='form-control']") 
 	WebElement searchTab;
+	
 	@FindBy(id = "search-btn")
 	WebElement searchBtn;
+	
 	@FindBy(xpath = "//h1[contains(.,'Order & Reparations')]") 
 	WebElement searchPage;
+	
 	@FindBy(xpath = "//table[@id='dynamic-table']//tbody/tr") 
 	List <WebElement> tableRowCount;
+	
 	@FindBy(xpath = "(//table[@id='dynamic-table']//tbody/tr)[1]/td") 
 	List <WebElement> tableRowColumnCount;
+	
 	@FindBy(xpath = "//div[@id='dynamic-table_paginate']//ul/li/a[contains(.,'Next > ')]") 
 	WebElement paginationNext;
+	
+	@FindBy(xpath="//a[text()='Next > ']") 
+	private List<WebElement> nextBtn;
 	
 	@FindBy(xpath = "(//aside//section//ul/li)[5]/ul/li/a[contains(.,' View Stock')]") 
 	WebElement viewStock;
@@ -70,38 +79,29 @@ public class HomePage {
 		searchTab.click();
 		skaObj.clearTextAndSendKeys(driver, searchTab, searchKey);
 		searchBtn.click();
-		//WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(20));
-		//wait.until(ExpectedConditions.visibilityOfElementLocated(searchPage));
+		uahObj.waitUntilElementVisible(driver, "//table[@id='dynamic-table']//tbody/tr");
 	}
 	public boolean checkSearchContent(String searchKey, String type) throws Exception {   
-		boolean isFound = false;
-		int isFoundCount = 0;
-		int rowCount = uahObj.getTableRowCount(driver, tableRowCount);
-		int columnCount = uahObj.getTableColumnCount(driver, tableRowColumnCount);
-		ArrayList contents = new ArrayList();
-		contents = uahObj.getAllTableContent(driver, rowCount-1, columnCount, "//table[@id='dynamic-table']//tbody/tr");
-		if(contents.size() > 0 && type.equals("invalid")) {
-			isFound = true;
-		}
-		if(contents.size() > 0 && type.equals("valid")) {
-			Iterator iterateContents = contents.iterator();
-			while(iterateContents.hasNext())
-			{
-				if(iterateContents.next().equals(searchKey)) {
-					isFoundCount++;
-				}
-			}
-			if(isFoundCount > 0) {
-				isFound = true;
+		boolean status = false;
+		if(type.equals("invalid")) {
+			if(vahObj.isElementPresentByXpath(driver, "//table[@id='dynamic-table']/tbody/tr/td[text()='No matching records found']")) {
+				status = true;
 			}
 		}
-		return isFound;
+		if(type.equals("valid")) {
+			if(vahObj.isElementPresentByXpath(driver, "(//table[@id='dynamic-table']/tbody/tr/td)[3]/a[text()='"+searchKey+"']")) {
+				status = true;
+			}
+		}
+		return status;
 	}
+	
 	public boolean isPaginationNextEnabled() throws Exception {
-		return vahObj.isElementEnabled(driver, paginationNext);
+		return paginationNext.getAttribute("class").contains("disabled");
 	}
 	public void clickOnPaginationNext() {
 		paginationNext.click();
+		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
 	}
 	
 	public boolean isSearchPageDisplayed() throws Exception {
@@ -126,11 +126,35 @@ public class HomePage {
 		return vahObj.isElementVisible(driver, models);
 	}
 	
+	public int getPaginationNextButtonSize() {
+		return nextBtn.size();
+	}
 	public ViewStockPage gotoStockPage() throws Exception {
 		stockTab.click();
-		//wait
+		uahObj.waitUntilElementVisible(driver, "(//aside//section//ul/li)[5]/ul/li/a[contains(.,' View Stock')]");
 		viewStock.click();
 		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
 		return new ViewStockPage(driver);
+	}
+	public AddProductPage gotoAddProductPage() throws Exception {
+		stockTab.click();
+		uahObj.waitUntilElementVisible(driver, "(//aside//section//ul/li)[5]/ul/li/a[contains(.,' Add Stock/Product')]");
+		addStock.click();
+		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
+		return new AddProductPage(driver);
+	}
+	public StockModelsPage gotoStockModelsPage() throws Exception {
+		stockTab.click();
+		uahObj.waitUntilElementVisible(driver, "(//aside//section//ul/li)[5]/ul/li/a[contains(.,' Models')]");
+		models.click();
+		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
+		return new StockModelsPage(driver);
+	}
+	public ManufacturersPage gotoManufacturersPage() throws Exception {
+		stockTab.click();
+		uahObj.waitUntilElementVisible(driver, "(//aside//section//ul/li)[5]/ul/li/a[contains(.,' Manufacturers')]");
+		manufacuures.click();
+		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
+		return new ManufacturersPage(driver);
 	}
 }

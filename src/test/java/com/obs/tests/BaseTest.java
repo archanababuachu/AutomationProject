@@ -35,7 +35,7 @@ public class BaseTest {
 	@AfterTest
 	public void quit() throws InterruptedException {
 		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3000));
-		//Thread.sleep(3000);
+		Thread.sleep(3000);
 		driver.quit();
 	}
 }
