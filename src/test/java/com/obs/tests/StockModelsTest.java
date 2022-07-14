@@ -1,7 +1,5 @@
 package com.obs.tests;
 
-import static org.testng.Assert.assertTrue;
-
 import java.time.Duration;
 import java.util.Properties;
 
@@ -38,7 +36,7 @@ public class StockModelsTest extends BaseTest{
 	/*
 	 * Verify all the fields are displayed in the Models Page(heading, Add Model Btn
 	 */
-	@Test(priority = 1, enabled = false, groups = {"SanityTest"})
+	@Test(priority = 1, enabled = true, groups = {"SanityTest"})
 	public void VerifyFieldsAreDisplayed() throws Exception {
 		soft = new SoftAssert();
 		soft.assertTrue(stockModelPage.isHeadingDisplayed(), "Heading is not displayed");
@@ -101,7 +99,7 @@ public class StockModelsTest extends BaseTest{
 	/*
 	 * Verify delete model , deletes the model
 	 */
-	@Test(priority = 6, enabled = true)           
+	@Test(priority = 6, enabled = false)           
 	public void verifyDeleteModel() throws Exception {
 		soft = new SoftAssert();
 		soft.assertTrue(stockModelPage.clickOnDeleteModelIcon(), "Model not deleted");

@@ -1,18 +1,12 @@
 package com.obs.pages;
 
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import com.obs.actions.SendKeysActionHelper;
 import com.obs.actions.UtilityActionHelper;
 import com.obs.actions.ValidationActionHelper;
@@ -206,45 +200,7 @@ public class ViewStockPage {
 			
 		}
 		return status;
-		/*ArrayList cellcontents = new ArrayList();
-		boolean isFound = false;
-		int foundCountValid = 0;
-		int foundCountInvalid = 0;
-		int foundCount = 0;
-		skahObj.clearTextAndSendKeys(driver, searchField, value);
-		Thread.sleep(2000);
-		int rowSize = uahObj.getTableRowCount(driver, searchTableRowCount);
-		int colSize = uahObj.getTableColumnCount(driver, searchTableColCount);
-		System.out.println("==============Roe "+rowSize+"  col "+colSize);
-		cellcontents = uahObj.getAllTableContent(driver, rowSize, colSize, "//table//tbody/tr");
-		if(cellcontents.size() == 0 && searchtype.equals("invalid")) {
-			isFound = true;
-			return isFound;
-		}
-		if(cellcontents.size() > 0 && searchtype.equals("invalid")) {
-			isFound = false;
-			return isFound;
-		}
-		Iterator iob = cellcontents.iterator();
-		for(int i=1; i<rowSize; i++) {
-			foundCount = 0;
-			foundCountInvalid = 0;
-			for(int j=1; j<colSize; j++) {
-				if(iob.hasNext()) {
-					String content = (String) iob.next();
-					if(content.contains(value)) {
-						foundCount++;
-					}
-				}
-			}
-			if(foundCount > 0 && searchtype.equals("valid")) {
-				foundCountValid++;
-			}
-		}
-		if(foundCountValid > 0 && searchtype.equals("valid")) {
-			isFound = true;
-		}
-		return isFound;*/
+		
 	}
 	public void refreshBrowse() {
 		wahObj.refreshBrowser(driver);

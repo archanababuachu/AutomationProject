@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Suite">
-  <test thread-count="5" name="ChromeTest">
+	<listeners>
+		<listener class-name="com.obs.listeners.TestListeners" />
+	</listeners>
+  <test thread-count="5" name="ChromeTest" preserve-order="true">
 	<parameter name="browserType" value="chrome"></parameter>
 	<groups>  
 		<run>  
@@ -9,11 +12,11 @@
 		</run>  
 	</groups>  
     <classes>
-      <class name="com.obs.tests.StockModelsTest"/>
+	  <class name="com.obs.tests.LoginTest"/>
+     <!-- <class name="com.obs.tests.StockModelsTest"/>
       <class name="com.obs.tests.AddProductTest"/>
       <class name="com.obs.tests.HomePageTest"/>
-      <class name="com.obs.tests.LoginTest"/>
-      <class name="com.obs.tests.ViewStockTest"/>
+      <class name="com.obs.tests.ViewStockTest"/> -->
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

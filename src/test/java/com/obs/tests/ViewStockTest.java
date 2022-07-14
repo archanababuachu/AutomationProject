@@ -1,16 +1,13 @@
 package com.obs.tests;
 
-import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
 
-import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import com.obs.datahandler.ExcelDataHandler;
 import com.obs.datahandler.PropertyDataHandler;
 import com.obs.pages.HomePage;
 import com.obs.pages.LoginPage;
@@ -37,7 +34,10 @@ public class ViewStockTest extends BaseTest{
 		
 	}
 	
-	@Test(priority = 1, enabled = false, groups = {"SanityTest"})
+	/*
+	 * Verify the fields displayed on View Stock page(Heading, actions drop down, search field, table heading)
+	 */
+	@Test(priority = 1, enabled = true, groups = {"SanityTest"})
 	public void validateViewStockFields() throws Exception {
 		soft = new SoftAssert();
 		soft.assertTrue(viewStockPage.isHeadingDisplayed(), "Heading not displayed");
@@ -50,11 +50,16 @@ public class ViewStockTest extends BaseTest{
 	/*
 	 * Verify while clicking on any inventory in the list, the details of the corresponding inventory is listed with barcode, and inventory
 	 */
-	@Test(priority = 2, enabled = true)
+	@Test(priority = 2, enabled = false)
 	public void verifyClickOnInventoryShowDetails() throws Exception {  //===========pending
 		soft = new SoftAssert();
 		soft.assertTrue(viewStockPage.clickOnInventoryList(), "Inventory details is not shown with barcode");
 	}
+	
+	/*
+	 * Verify the sublist is displayed while clicking on the action drop down symbol on right side and validate the sublist (Add Product,
+	 *  Print Barcode/label. Export to excel file,Export to pdf file, Import Products,Delete Products)
+	 */
 	@Test(priority = 3, enabled = false)
 	public void verifyDisplayAndValidationOfSubList() throws Exception {
 		soft = new SoftAssert();

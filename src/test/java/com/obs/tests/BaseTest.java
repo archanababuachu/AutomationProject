@@ -6,11 +6,13 @@ import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 
 import com.obs.actions.WebActionHelper;
 import com.obs.datahandler.PropertyDataHandler;
+import com.obs.pages.LoginPage;
 
 public class BaseTest {
 
@@ -34,8 +36,7 @@ public class BaseTest {
 	
 	@AfterTest
 	public void quit() throws InterruptedException {
-		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3000));
-		Thread.sleep(3000);
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3000));
 		driver.quit();
 	}
 }

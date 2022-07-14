@@ -12,7 +12,6 @@ import com.obs.datahandler.PropertyDataHandler;
 import com.obs.pages.HomePage;
 import com.obs.pages.LoginPage;
 import com.obs.pages.ManufacturersPage;
-import com.obs.pages.ViewStockPage;
 
 public class ManufacturersTest extends BaseTest{
 	
@@ -38,7 +37,7 @@ public class ManufacturersTest extends BaseTest{
 	 * 
 	 * Validate Manufacturers Page fields
 	 */
-	@Test(priority = 1, enabled = false)
+	@Test(priority = 1, enabled = true)
 	public void validateManufacturerPageFields() throws Exception {
 		soft = new SoftAssert();
 		soft.assertTrue(manufacturersPage.isManufacturerAddBtnLinkDisplayed(), "Manufacturer Add Link Button is not displayed");
@@ -67,7 +66,10 @@ public class ManufacturersTest extends BaseTest{
 		soft.assertAll();
 	}
 	
-	@Test(priority = 2, enabled = true)
+	/*
+	 * Verify Search Manufacturer shows correct result , for valid ->valid result, and for invalid-> empty result
+	 */
+	@Test(priority = 4, enabled = false)
 	public void verifySearchManufacturer() throws Exception{
 		soft = new SoftAssert();
 		manufacturersPage.clickOnSearchField();

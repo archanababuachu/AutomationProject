@@ -1,14 +1,19 @@
 package com.obs.tests;
 
-import java.time.Duration;
+import java.io.IOException;
+import java.util.Properties;
 
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import com.obs.actions.WebActionHelper;
+import com.obs.datahandler.PropertyDataHandler;
 import com.obs.pages.LoginPage;
 
 public class LoginTest extends BaseTest{
@@ -20,8 +25,27 @@ public class LoginTest extends BaseTest{
 	public void invokeLoginPage() {
 		lpage = new LoginPage(driver);
 	}
-
-	@Test(priority = 0, enabled = false)
+	
+	@Parameters("browserType")
+	@BeforeGroups(groups = "SanityTest")
+	public void launchG(String browserType) throws IOException {
+		
+		WebActionHelper wahObj = new WebActionHelper();
+		PropertyDataHandler prop = new PropertyDataHandler();
+		
+		final String currentDir = System.getProperty("user.dir");
+		final String filePath = currentDir + "/src/main/resources/" + "chromedriver.exe";
+		
+		driver = wahObj.initializeDriver(browserType, filePath);
+		
+		Properties allProp = prop.readPropertiesFile("config.properties");
+		wahObj.launchURL(driver, allProp.getProperty("url"));
+		lpage = new LoginPage(driver);
+	}
+	/*
+	 * Verify that the user is able to launch the URL
+	 */
+	@Test(priority = 0, enabled = true)
 	public void verifyURLandTitle(){
 		soft = new SoftAssert();
 		soft.assertEquals(lpage.getURL(), "https://qalegend.com/mobile_service/panel/login", "Wrong URL Launched");
@@ -29,19 +53,24 @@ public class LoginTest extends BaseTest{
 		soft.assertAll();
 	}
 	
-	@Test(priority = 1)
+	/*
+	 * Verify all fields are displayed on the login page (User Name, Password, Login Button, Remember Me checkbox, Forget Password Link, Back to home Page Link)
+	 */
+	@Test(priority = 1, enabled = true)
 	public void validateLoginPageFields() throws Exception {
 		soft = new SoftAssert();
 		soft.assertTrue(lpage.isUserNameFieldDisplayed(), "User Name field is not displayed");
 		soft.assertTrue(lpage.isPasswordFieldDisplayed(), "Password field is not displayed");
 		soft.assertTrue(lpage.isLoginBtnDisplayed(), "Login Button is not displayed");
-		//soft.assertTrue(lpage.isRememberMeCheckboxDisplayed(), "Remember Me checkbox is not displayed");
 		soft.assertTrue(lpage.isBackToHomePageLinkDisplayed(), "Back to home page link is not displayed");
 		soft.assertTrue(lpage.isForgetPwdLinkDisplayed(), "Forget password link is not displayed");
 		soft.assertAll();
 	}
 	
-	@Test(priority = 2)
+	/*
+	 * Verify that the forget password link redirects to forget password page and in that page Back to login link redirects to Login Page
+	 */
+	@Test(priority = 2, enabled = true)
 	public void verifyForgetPwdAndBackToLogin() throws Exception {
 		soft = new SoftAssert();
 		soft.assertTrue(lpage.isForgetPasswordLinkRedirects(), "Forget Password Link Not Working");
@@ -49,6 +78,9 @@ public class LoginTest extends BaseTest{
 		soft.assertAll();
 	}
 	
+	/*
+	 * Verify that the user is able to login to the page
+	 */
 	@Test(priority = 3, dataProvider = "Credentials", enabled = true, groups = {"SanityTest"})
 	public void verifyAllLogin(String uname, String pwd) throws Exception {
 		

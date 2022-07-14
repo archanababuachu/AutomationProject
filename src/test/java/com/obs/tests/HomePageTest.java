@@ -1,6 +1,5 @@
 package com.obs.tests;
 
-import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
 
@@ -29,7 +28,10 @@ public class HomePageTest extends BaseTest{
 		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(50));
 	}
 	
-	@Test(priority = 1, enabled = false)
+	/*
+	 * Verify the fields are displayed on the Home Page(Hamberger button, Stock/inventory navigation Menu)
+	 */
+	@Test(priority = 1, enabled = true)
 	public void validateHomePage() throws Exception {
 		soft = new SoftAssert();
 		soft.assertTrue(homePage.isHambergerButtonDisplayed(), "Hamberger Button is not displayed");
@@ -37,7 +39,10 @@ public class HomePageTest extends BaseTest{
 		soft.assertAll();
 	}
 	
-	@Test(priority = 2, enabled = true)
+	/*
+	 * Verify the search reparation shows an empty list with an invalid search content
+	 */
+	@Test(priority = 2, enabled = false)
 	public void verifySearchWithInvalidData() throws Exception { //bug found
 		soft = new SoftAssert();
 		homePage.performSearchOperation("zzz");
@@ -49,7 +54,7 @@ public class HomePageTest extends BaseTest{
 	/*
 	 * Verify the search reparation shows reperation list according to the search content
 	 */
-	@Test(priority = 3, enabled = false)    
+	@Test(priority = 3, enabled = true)    
 	public void verifySearchWithValidData() throws Exception {
 		soft = new SoftAssert();
 		homePage.performSearchOperation("aaa");
@@ -57,6 +62,9 @@ public class HomePageTest extends BaseTest{
 		soft.assertTrue(homePage.checkSearchContent("aaa","valid"), "Search with valid data- not showing list with serach content");
 	}
 	
+	/*
+	 * Verify the sublist is displayed while clicking on the Stock/Inventoy navigation , and clicking on each sublist check wheather it redirects to corresponding page
+	 */
 	@Test(priority = 4, enabled = true, groups= {"SanityTest"})
 	public void verifyStockSublist() throws Exception { //if only executed this test all asertion passed, otherwise only first assertion is passed (sometimes any number
 		soft = new SoftAssert();

@@ -18,14 +18,17 @@ import com.obs.datahandler.PropertyDataHandler;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class WebActionHelper {
+	
+	static WebDriver driver;
 
+	
 	/**
 	 * method to intialize driver	
 	 * @return 
 	 */
 	public WebDriver initializeDriver(String browserType, String filePath) {
 		
-		WebDriver driver = null;
+		 
 		try {
 			switch (browserType) {
 			case "chrome": 
@@ -57,6 +60,11 @@ public class WebActionHelper {
 		}
 		
 	}
+	
+	public static WebDriver getDriver() {
+		return driver;
+	}
+	
 	/**
 	 * method to navigate to URL
 	 */

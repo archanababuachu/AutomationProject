@@ -1,6 +1,5 @@
 package com.obs.tests;
 
-import java.time.Duration;
 import java.util.Properties;
 
 import org.testng.Assert;
@@ -35,7 +34,7 @@ public class AddProductTest extends BaseTest{
 	/*
 	 * Verify all the fields are displayed in the Add Stock/Product page
 	 */
-	@Test(priority =1 , enabled = false, groups= {"SanityTest"})
+	@Test(priority =1 , enabled = true, groups= {"SanityTest"})
 	public void validateAddProductFileds() throws Exception {
 		soft = new SoftAssert();
 		soft.assertTrue(addProductPage.isProductTypeDisplayed(), "Product Type is not displayed");

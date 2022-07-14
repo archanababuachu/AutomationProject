@@ -189,7 +189,6 @@ public class AddProductPage {
 		//String value = productCode.getText();
 		skahObj.clearTextAndSendKeys(driver, productCode, "565447678");
 		
-		Thread.sleep(3000);
 	}
 
 	public void selectCategory(String cat) throws Exception {
